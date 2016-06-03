@@ -35,22 +35,22 @@ describe Spree::LineItemPersonalization do
       it "should have length greater than 1" do
         @line_item_personalization.value = ""
         @line_item_personalization.name = personalization_name
-        expect(@line_item_personalization.valid?).to be_false
+        expect(@line_item_personalization.valid?).to eq false
         expect(@line_item_personalization.errors[:base].first).to eq({personalization_name => "#{personalization_name} is required"})
 
         @line_item_personalization.value = "A"
-        expect(@line_item_personalization.valid?).to be_true
+        expect(@line_item_personalization.valid?).to eq true
       end
 
       it "should have length less than limit" do
         @line_item_personalization.limit = 5
         @line_item_personalization.name = personalization_name
         @line_item_personalization.value = "A long value"
-        expect(@line_item_personalization.valid?).to be_false
+        expect(@line_item_personalization.valid?).to eq false
         expect(@line_item_personalization.errors[:base].first).to eq({personalization_name => "#{personalization_name} is too long (maximum is 5 characters)"})
 
         @line_item_personalization.value = "long"
-        expect(@line_item_personalization.valid?).to be_true
+        expect(@line_item_personalization.valid?).to eq true
       end
     end
 
@@ -141,7 +141,7 @@ describe Spree::LineItemPersonalization do
   it "create new line_item when params is in wrong format" do
     old_item = @order.contents.add(@variant, @quantity)
 
-    expect(@order.personalizations_match(old_item, 1)).to be_false
+    expect(@order.personalizations_match(old_item, 1)).to eq false
   end
 
 end

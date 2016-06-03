@@ -25,59 +25,59 @@ describe Spree::ProductPersonalization do
   describe "Validations" do
     before do
       @target = build(:product_personalization)
-      expect(@target.valid?).to be_true
+      expect(@target.valid?).to eq true
     end
 
     it "fails when name is too short" do
       @target.name = ""
-      expect(@target.valid?).to be_false
+      expect(@target.valid?).to eq false
     end
 
     it "fails when name is too long" do
       @target.name = "a" * (Spree::Personalization::Config[:label_limit] + 1)
-      expect(@target.valid?).to be_false
+      expect(@target.valid?).to eq false
     end
 
     it "fails when description is too long" do
       @target.description = "a" * (Spree::Personalization::Config[:description_limit] + 1)
-      expect(@target.valid?).to be_false
+      expect(@target.valid?).to eq false
     end
 
     it "fails when limit is too small" do
       @target.limit = 0
-      expect(@target.valid?).to be_false
+      expect(@target.valid?).to eq false
     end
 
     it "fails when limit is too big" do
       @target.limit = Spree::Personalization::Config[:text_limit] + 1
-      expect(@target.valid?).to be_false
+      expect(@target.valid?).to eq false
     end
 
     it "fails when price is negative" do
       @target.calculator.preferred_amount = -1.0
-      expect(@target.valid?).to be_false
+      expect(@target.valid?).to eq false
     end
 
     context "attribute kind" do
       it 'should be invalid for empty value' do
         @target.kind = nil
-        expect(@target.valid?).to be_false
+        expect(@target.valid?).to eq false
         expect(@target.errors.full_messages.first).to eq "Kind  is not a valid type of personalization"
       end
 
       it 'should be invalid for bad values' do
         @target.kind = "random"
-        expect(@target.valid?).to be_false
+        expect(@target.valid?).to eq false
         expect(@target.errors.full_messages.first).to eq "Kind random is not a valid type of personalization"
       end
 
       it 'should be valid for a valid value' do
         @target.kind = "text"
-        expect(@target.valid?).to be_true
+        expect(@target.valid?).to eq true
         @target.kind = "list"
         option_value_product_personalization = build(:option_value_product_personalization, product_personalization: @target)
         @target.option_value_product_personalizations << option_value_product_personalization
-        expect(@target.valid?).to be_true
+        expect(@target.valid?).to eq true
       end
     end
 
@@ -89,13 +89,13 @@ describe Spree::ProductPersonalization do
 
         it 'should be valid if option values are absent' do
           @target.option_value_product_personalizations = []
-          expect(@target.valid?).to be_true
+          expect(@target.valid?).to eq true
         end
 
         it 'should be invalid if option values are present' do
           option_value_product_personalization = build(:option_value_product_personalization, product_personalization: @target)
           @target.option_value_product_personalizations << option_value_product_personalization
-          expect(@target.valid?).to be_false
+          expect(@target.valid?).to eq false
           expect(@target.errors.full_messages.first).to eq "Text personalization cannot have options"
         end
       end
@@ -107,14 +107,14 @@ describe Spree::ProductPersonalization do
 
         it 'should be invalid if option values are absent' do
           @target.option_value_product_personalizations = []
-          expect(@target.valid?).to be_false
+          expect(@target.valid?).to eq false
           expect(@target.errors.full_messages.first).to eq "Options personalization should have options"
         end
 
         it 'should be valid if option values are present' do
           option_value_product_personalization = build(:option_value_product_personalization, product_personalization: @target)
           @target.option_value_product_personalizations << option_value_product_personalization
-          expect(@target.valid?).to be_true
+          expect(@target.valid?).to eq true
         end
       end
     end

@@ -31,7 +31,7 @@ describe Spree::Order do
       it "does not merge together two orders with line items for the same variant but different personalization" do
         order_1.merge!(order_2)
         line_items = order_1.line_items
-        line_item_1, line_item_2 = line_items.all
+        line_item_1, line_item_2 = line_items.load
 
         expect(line_items.count).to eq(2)
         expect(line_items.pluck(:quantity)).to eq([1, 1])
@@ -50,7 +50,7 @@ describe Spree::Order do
       it "does not merge together two orders with line items for the same variant but different personalization" do
         order_1.merge!(order_2)
         line_items = order_1.line_items
-        line_item_1, line_item_2 = line_items.all
+        line_item_1, line_item_2 = line_items.load
 
         expect(line_items.count).to eq(2)
         expect(line_items.pluck(:quantity)).to eq([1, 1])
@@ -65,7 +65,7 @@ describe Spree::Order do
       order_2.contents.add(variant, 1, { personalizations_attributes: [personalization_1] })
       order_1.merge!(order_2)
       line_items = order_1.line_items
-      line_item_1, line_item_2 = line_items.all
+      line_item_1, line_item_2 = line_items.load
 
       expect(line_items.count).to eq(2)
       expect(line_items.pluck(:quantity)).to eq([1, 1])
@@ -79,7 +79,7 @@ describe Spree::Order do
       order_2.contents.add(variant, 1)
       order_1.merge!(order_2)
       line_items = order_1.line_items
-      line_item_1, line_item_2 = line_items.all
+      line_item_1, line_item_2 = line_items.load
 
       expect(line_items.count).to eq(2)
       expect(line_items.pluck(:quantity)).to eq([1, 1])

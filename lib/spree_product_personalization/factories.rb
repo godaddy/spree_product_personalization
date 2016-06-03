@@ -16,7 +16,7 @@ FactoryGirl.define do
     calculator { |p| p.association(:personalization_calculator) }
 
     factory :product_personalization_with_option_value do
-      ignore do
+      transient do
         option_value_count 3
       end
       after(:create) do |personalization, evaluator|
@@ -36,7 +36,7 @@ FactoryGirl.define do
   end
 
   factory :product_with_personalizations, parent: :product do
-    ignore do
+    transient do
       personalization_count 3
     end
     after(:create) do |product, evaluator|
@@ -45,7 +45,7 @@ FactoryGirl.define do
   end
 
   factory :product_with_option_value_personalizations, parent: :product do
-    ignore do
+    transient do
       personalization_count 3
     end
     after(:create) do |product, evaluator|
@@ -54,7 +54,7 @@ FactoryGirl.define do
   end
 
   factory :variant_with_personalizations, parent: :variant do
-    ignore do
+    transient do
       personalization_count 3
     end
     after(:create) do |variant, evaluator|

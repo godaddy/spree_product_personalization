@@ -29,8 +29,8 @@ describe Spree::LineItem do
     it "is invalid when required personalization is not set" do
       @product_personalizations[0].required = true
       line_item = @order.contents.add(@variant, @quantity, get_params([@personalization_2, @personalization_4]))
-      expect(line_item.valid?).to be_false
-      expect(line_item.errors.messages[:'personalizations.missing'].size > 0).to be_true
+      expect(line_item.valid?).to eq false
+      expect(line_item.errors.messages[:'personalizations.missing'].size > 0).to eq true
     end
   end
 
@@ -73,12 +73,12 @@ describe Spree::LineItem do
         expect(line_item.quantity).to eq(@quantity)
         expect(line_item.personalizations.count).to eq 3
 
-        expect(line_item.personalizations.map(&:value).uniq).to eq [@personalization_1[:value], @personalization_2[:value], @select_option_value_product_personalization.option_value.name]
-        expect(line_item.personalizations.map(&:name).uniq).to eq [@personalization_1[:name], @personalization_2[:name], @personalization_4[:name]]
-        expect(line_item.personalizations.map(&:limit).uniq).to eq [45, 67, 200]
+        expect(line_item.personalizations.map(&:value).uniq).to eq [@personalization_1[:value], @personalization_2[:value], @select_option_value_product_personalization.option_value.name, 'some_value']
+        expect(line_item.personalizations.map(&:name).uniq).to eq [@personalization_1[:name], @personalization_2[:name], @personalization_4[:name], 'Not-Set-In-Product']
+        expect(line_item.personalizations.map(&:limit).uniq).to eq [45, 67, 200, 255]
 
-        expect(line_item.personalizations.map(&:price).map(&:to_s)).to eq ["5.0", "7.0", "9.0"]
-        expect(line_item.personalizations.map(&:currency).uniq).to eq ["USD"]
+        expect(line_item.personalizations.map(&:price).map(&:to_s)).to eq ["5.0", "7.0", "9.0", '']
+        expect(line_item.personalizations.map(&:currency).compact.uniq).to eq ["USD"]
       end
     end
   end

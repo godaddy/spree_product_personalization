@@ -9,6 +9,7 @@ gemspec
 
 group :development, :test do
   gem 'rails', '~> 4.0.5'
+  gem 'test-unit'
   gem 'factory_girl_rails', '~> 4.0'
   gem 'awesome_print'
   gem 'simplecov-rcov'

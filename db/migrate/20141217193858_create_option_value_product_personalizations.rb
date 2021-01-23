@@ -1,4 +1,4 @@
-class CreateOptionValueProductPersonalizations < ActiveRecord::Migration
+class CreateOptionValueProductPersonalizations < ActiveRecord::Migration[4.2]
   def change
     create_table :spree_option_value_product_personalizations do |t|
       t.integer :product_personalization_id

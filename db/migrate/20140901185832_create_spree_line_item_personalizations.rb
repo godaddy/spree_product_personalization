@@ -1,4 +1,4 @@
-class CreateSpreeLineItemPersonalizations < ActiveRecord::Migration
+class CreateSpreeLineItemPersonalizations < ActiveRecord::Migration[4.2]
   def change
     create_table :spree_line_item_personalizations do |t|
       t.integer  :line_item_id

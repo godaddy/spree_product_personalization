@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Spree
-  class LineItemPersonalization < ActiveRecord::Base
+  class LineItemPersonalization < ApplicationRecord
     belongs_to :line_item
     belongs_to :product_personalization, class_name: "Spree::ProductPersonalization", foreign_key: "spree_product_personalization_id"
     belongs_to :option_value_product_personalization, class_name: "Spree::OptionValueProductPersonalization", foreign_key: "spree_option_value_product_personalization_id"

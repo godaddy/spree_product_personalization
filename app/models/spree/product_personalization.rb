@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Spree
-  class ProductPersonalization < ActiveRecord::Base
+  class ProductPersonalization < ApplicationRecord
     include Spree::Core::CalculatedAdjustments
 
     belongs_to :product

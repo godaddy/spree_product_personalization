@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Spree
-  class OptionValueProductPersonalization < ActiveRecord::Base
+  class OptionValueProductPersonalization < ApplicationRecord
     include Spree::Core::CalculatedAdjustments
 
     belongs_to :product_personalization, class_name: 'Spree::ProductPersonalization', inverse_of: :option_value_product_personalizations

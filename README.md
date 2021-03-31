@@ -1,3 +1,6 @@
+# This gem is no longer supported and will be archived soon!
+
+
 SpreeProductPersonalization
 ===========================
 

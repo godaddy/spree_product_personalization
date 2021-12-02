@@ -14,7 +14,7 @@ module SpreeProductPersonalization
     end
 
     initializer "spree.personalization.preferences", before: :load_config_initializers do |app|
-      Spree::Personalization::Config = Spree::PersonalizationConfiguration.new
+      Spree::Personalization::Config = Spree::Preferences::Configuration.new
     end
 
     def self.activate

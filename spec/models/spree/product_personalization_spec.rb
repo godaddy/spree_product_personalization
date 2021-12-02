@@ -32,12 +32,12 @@ RSpec.describe Spree::ProductPersonalization do
     end
 
     it "fails when name is too long" do
-      @target.name = "a" * (Spree::Personalization::Config[:label_limit] + 1)
+      @target.name = "a" * (Spree::ProductPersonalization::LABEL_LIMIT + 1)
       expect(@target.valid?).to eq false
     end
 
     it "fails when description is too long" do
-      @target.description = "a" * (Spree::Personalization::Config[:description_limit] + 1)
+      @target.description = "a" * (Spree::ProductPersonalization::DESCRIPTION_LIMIT + 1)
       expect(@target.valid?).to eq false
     end
 
@@ -47,7 +47,7 @@ RSpec.describe Spree::ProductPersonalization do
     end
 
     it "fails when limit is too big" do
-      @target.limit = Spree::Personalization::Config[:text_limit] + 1
+      @target.limit = Spree::ProductPersonalization::TEXT_LIMIT + 1
       expect(@target.valid?).to eq false
     end
 
